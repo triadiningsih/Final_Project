@@ -6,6 +6,8 @@ struct data{
 	char nama[100];
 	char domain[50];
 	char nomber[12];
+	char alamat[50];
+	char catatan[200];
 	struct data *next;
 };
 struct data *buku_telepon[50];
@@ -157,6 +159,10 @@ struct data *list(int full){
 	baru=malloc(sizeof(struct data));fflush(stdin);
 	printf("Nama Kontak:");scanf("%[^\n]",&baru->nama);fflush(stdin);
 	printf("No Telepon:");scanf("%[^\n]",&baru->nomber);fflush(stdin);
+	printf("Alamat:");scanf("%[^\n]",&baru->alamat);fflush(stdin);
+	printf("Catatan:");scanf("%[^\n]",&baru->catatan);fflush(stdin);
+
+
 	baru->next=NULL;
 	if(buku_telepon[pilihan]->next==NULL){
 		buku_telepon[pilihan]->next=baru;
@@ -186,6 +192,8 @@ struct data *edit(int dom){
 			fflush(stdin);
 			printf("Nama Kontak:");scanf("%[^\n]",&ptr->nama);fflush(stdin);
 			printf("No Telepon:");scanf("%[^\n]",&ptr->nomber);fflush(stdin);
+			printf("Alamat:");scanf("%[^\n]",&ptr->alamat);fflush(stdin);
+			printf("Catatan:");scanf("%[^\n]",&ptr->catatan);fflush(stdin);	
 			break;
 		}
 		ptr=ptr->next;
@@ -220,7 +228,9 @@ struct data *view(int full){
 			ptr=buku_telepon[i]->next;
 			while(ptr!=NULL){
 				printf("\n Nama Kontak	: %s" , ptr->nama);
-				printf("\n Nomor Telepon	: %s\n",  ptr->nomber);
+				printf("\n Nomor Telepon	: %s",  ptr->nomber);
+				printf("\n Alamat Kontak	: %s",  ptr->alamat);
+				printf("\n Catatan Kontak	: %s\n",  ptr->catatan);
 				ptr=ptr->next;
 			}
 		}
