@@ -39,7 +39,7 @@ int main() {
 		printf("|                  3. Hapus Kontak                     |\n");
 		printf("|                  4. Lihat Kontak                     |\n");
 		printf("|                  5. Cari Kontak                      |\n");
-		printf("|                  0. Keluar                           |\n");
+		printf("|                  0. Keluar Program                          |\n");
 		printf("--------------------------------------------------------\n");
 		printf("Input pilihan yang Anda inginkan : ");
 		scanf("%d", &input);
@@ -296,7 +296,7 @@ struct data *find(int dom){
 			break;
 			
 		case 2:
-			printf("\n input Nomor Telepon yang ingin di dicari: ");
+			printf("\n input nomor telepon yang ingin di dicari: ");
 			scanf("%[^\n]",&search);fflush(stdin);
 				while(ptr!=NULL){
 					if(strcmp(ptr->nomber,search)==0){
