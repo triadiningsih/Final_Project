@@ -13,16 +13,15 @@ struct data *buku_telepon[50];
 void init(int);
 //list telepon
 struct data *list(int);
+struct data *edit(int);
 int item=0;
 int main() {
-	int input,n_domain,full,pengisian=0;
+	int input,n_domain,full,pengisian=0,dom;
 	char konfim;
 	printf("              Selamat Datang di Buku Telepon            \n");
-	printf("Jumlah Domain Telepon:");scanf("%d",&n_domain);
+	printf("Jumlah Domain Telepon:");scanf("%d",&n_domain);system("cls");
 	init(n_domain);
 	do {
-	sleep(5);
-	system("cls");
 		printf("              Selamat Datang di Buku Telepon            \n");
 		printf("           Silahkan input menu yang Anda sukai!!        \n");
 		printf("========================================================\n");
@@ -86,7 +85,14 @@ int main() {
 				list(full);
 				break;
 			case 2:
-                printf("Halo");
+                printf("|                  Domain Kontak                    |\n");
+				printf("List Domain:\n");
+				for(int i=0;i<full;i++){
+					printf("%d.%s\n",i+1,buku_telepon[i]->domain);
+				}
+				printf("Pilih domain :");scanf("%d",&dom);
+				dom=dom-1;
+				edit(dom);
 				break;
 
 			case 3:
@@ -145,5 +151,27 @@ struct data *list(int full){
 			ptr=ptr->next;
 		}
 		ptr=baru;
+	}
+}
+struct data *edit(int dom){
+	struct data *ptr;
+	char nama_edit[50];
+	ptr=buku_telepon[dom]->next;
+	while(ptr!=NULL){
+		printf("%s->",ptr->nama);
+		ptr=ptr->next;
+	}
+	printf("NULL");
+	fflush(stdin);
+	printf("\nPilih Nama Kontak untuk di edit: ");scanf("%[^\n]",&nama_edit);fflush(stdin);
+	ptr=buku_telepon[dom]->next;
+	while(ptr!=NULL){
+		if(strcmp(ptr->nama,nama_edit)==0){
+			fflush(stdin);
+			printf("Nama Kontak:");scanf("%[^\n]",&ptr->nama);fflush(stdin);
+			printf("No Telepon:");scanf("%[^\n]",&ptr->nomber);fflush(stdin);
+			break;
+		}
+		ptr=ptr->next;
 	}
 }
