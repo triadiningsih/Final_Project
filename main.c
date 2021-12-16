@@ -12,10 +12,10 @@ struct data *buku_telepon[50];
 //null exception hash_table
 void init(int);
 //list telepon
-void *list(int);
+struct data *list(int);
 int item=0;
 int main() {
-	int input,n_domain,full;
+	int input,n_domain,full,pengisian=0;
 	char konfim;
 	printf("              Selamat Datang di Buku Telepon            \n");
 	printf("Jumlah Domain Telepon:");scanf("%d",&n_domain);
@@ -43,22 +43,46 @@ int main() {
 		switch(input){
 
 			case 1:
-                do{
-					printf("|                  Domain Kontak                    |\n");
-					struct data *sub, *empty;
-					sub=malloc(sizeof(struct data));
-					sub->next=NULL;//Petanda Sudah Ada Domain
-					printf("\nAlokasi Domain Barang:\n");
-					fflush(stdin);
-					printf("Domain Barang ke %i:",item+1);scanf("%[^\n]",&sub->domain);fflush(stdin);
-					buku_telepon[item]=sub;
-					++item;
-					full=item;
-					empty=malloc(sizeof(struct data));
-					empty=NULL;
-					buku_telepon[full]=empty;//Tidak Ada Domain
-					printf("Lagi(y|t) :");scanf("%c",&konfim);
-				}while(konfim=='y');
+				if(pengisian==0){
+					do{
+						printf("|                  Domain Kontak                    |\n");
+						struct data *sub, *empty;
+						sub=malloc(sizeof(struct data));
+						sub->next=NULL;//Petanda Sudah Ada Domain
+						printf("\nAlokasi Domain Barang:\n");
+						fflush(stdin);
+						printf("Domain Barang ke %i:",item+1);scanf("%[^\n]",&sub->domain);fflush(stdin);
+						buku_telepon[item]=sub;
+						++item;
+						full=item;
+						empty=malloc(sizeof(struct data));
+						empty=NULL;
+						buku_telepon[full]=empty;//Tidak Ada Domain
+						++pengisian;
+						printf("Lagi(y|t) :");scanf("%c",&konfim);
+					}while(konfim=='y');
+				}
+				else{
+					printf("Tambah Domain?(y|t):");scanf("%c",&konfim);
+					if(konfim=='y'){
+						do{
+							printf("|                  Domain Kontak                    |\n");
+							struct data *sub, *empty;
+							sub=malloc(sizeof(struct data));
+							sub->next=NULL;//Petanda Sudah Ada Domain
+							printf("\nAlokasi Domain Barang:\n");
+							fflush(stdin);
+							printf("Domain Barang ke %i:",item+1);scanf("%[^\n]",&sub->domain);fflush(stdin);
+							buku_telepon[item]=sub;
+							++item;
+							full=item;
+							empty=malloc(sizeof(struct data));
+							empty=NULL;
+							buku_telepon[full]=empty;//Tidak Ada Domain
+							printf("Lagi(y|t) :");scanf("%c",&konfim);
+						}while(konfim=='y');
+					}
+				}
 				list(full);
 				break;
 			case 2:
@@ -97,12 +121,29 @@ void init(int n_domain){
 		buku_telepon[i]=NULL;
 	}
 }
-void *list(int full){
+struct data *list(int full){
 	int pilihan;
 	printf("|                  Domain Kontak                    |\n");
 	printf("List Domain:\n");
 	for(int i=0;i<full;i++){
 		printf("%d.%s\n",i+1,buku_telepon[i]->domain);
 	}
-	printf("Pilih Domain:");scanf("")
+	printf("Pilih Domain:");scanf("%d",&pilihan);
+	pilihan=pilihan-1;
+	struct data *baru,*ptr;
+	baru=malloc(sizeof(struct data));fflush(stdin);
+	printf("Nama Kontak:");scanf("%[^\n]",&baru->nama);fflush(stdin);
+	printf("No Telepon:");scanf("%[^\n]",&baru->nomber);fflush(stdin);
+	baru->next=NULL;
+	printf("test");
+	if(buku_telepon[pilihan]->next==NULL){
+		buku_telepon[pilihan]->next=baru;
+	}
+	else{
+		ptr=buku_telepon[pilihan]->next;
+		while(ptr!=NULL){
+			ptr=ptr->next;
+		}
+		ptr=baru;
+	}
 }
