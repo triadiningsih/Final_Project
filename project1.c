@@ -13,7 +13,7 @@ int domain_hashing(int n);
 void init(int n);
 int main(){
     int n;
-    printf("Jumlah Domain Kontak :");scanf("%d",&n);
+    printf("Jumlah domain kontak :");scanf("%d",&n);
     init(n);
 
     domain_hashing(n);
