@@ -39,7 +39,7 @@ int main() {
 		printf("|                  3. Hapus Kontak                     |\n");
 		printf("|                  4. Lihat Kontak                     |\n");
 		printf("|                  5. Cari Kontak                      |\n");
-		printf("|                  0. Keluar                           |\n");
+		printf("|                  0. Keluar Program                          |\n");
 		printf("--------------------------------------------------------\n");
 		printf("Input pilihan yang Anda inginkan : ");
 		scanf("%d", &input);
