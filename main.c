@@ -62,7 +62,8 @@ int main() {
 					}while(konfim=='y');
 				}
 				else{
-					printf("Tambah Domain?(y|t):");scanf("%c",&konfim);
+					fflush(stdin);
+					printf("Tambah Domain?(y|t):");scanf("%c",&konfim);fflush(stdin);
 					if(konfim=='y'){
 						do{
 							printf("|                  Domain Kontak                    |\n");
@@ -141,16 +142,20 @@ struct data *list(int full){
 	printf("Nama Kontak:");scanf("%[^\n]",&baru->nama);fflush(stdin);
 	printf("No Telepon:");scanf("%[^\n]",&baru->nomber);fflush(stdin);
 	baru->next=NULL;
-	printf("test");
 	if(buku_telepon[pilihan]->next==NULL){
 		buku_telepon[pilihan]->next=baru;
 	}
 	else{
 		ptr=buku_telepon[pilihan]->next;
-		while(ptr!=NULL){
+		while(ptr->next!=NULL){
 			ptr=ptr->next;
 		}
-		ptr=baru;
+		ptr->next=baru;
+	}
+	ptr=buku_telepon[pilihan]->next;
+	while(ptr!=NULL){
+		printf("%s->",ptr->nama);
+		ptr=ptr->next;
 	}
 }
 struct data *edit(int dom){
