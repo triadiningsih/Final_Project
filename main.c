@@ -14,6 +14,7 @@ void init(int);
 //list telepon
 struct data *list(int);
 struct data *edit(int);
+struct data *hapus(int);
 int item=0;
 int main() {
 	int input,n_domain,full,pengisian=0,dom;
@@ -97,13 +98,19 @@ int main() {
 				break;
 
 			case 3:
-                printf("Halo");
+                printf("|                  Domain Kontak                    |\n");
+				printf("List Domain:\n");
+				for(int i=0;i<full;i++){
+					printf("%d.%s\n",i+1,buku_telepon[i]->domain);
+				}
+				printf("Pilih domain :");scanf("%d",&dom);
+				dom=dom-1;
+				hapus(dom);
 				break;
 
 			case 4:
-                printf("Halo");
-				break;
-
+               
+			break;
 			case 5 :
                 printf("Halo");
                 break;
@@ -152,11 +159,6 @@ struct data *list(int full){
 		}
 		ptr->next=baru;
 	}
-	ptr=buku_telepon[pilihan]->next;
-	while(ptr!=NULL){
-		printf("%s->",ptr->nama);
-		ptr=ptr->next;
-	}
 }
 struct data *edit(int dom){
 	struct data *ptr;
@@ -177,6 +179,23 @@ struct data *edit(int dom){
 			printf("No Telepon:");scanf("%[^\n]",&ptr->nomber);fflush(stdin);
 			break;
 		}
+		ptr=ptr->next;
+	}
+}
+struct data *hapus(int dom){
+	char nama_dom[50];
+	fflush(stdin);
+	printf("Nama Kontak (Dihapus):");scanf("%[^\n]",&nama_dom);fflush(stdin);
+	struct data *ptr,*preptr;
+	preptr=ptr=buku_telepon[dom];
+	while(ptr!=NULL){
+		if(strcmp(ptr->nama,nama_dom)==0){
+			preptr->next=ptr->next;
+			free(ptr);
+			ptr=preptr;
+			break;
+		}
+		preptr=ptr;
 		ptr=ptr->next;
 	}
 }
